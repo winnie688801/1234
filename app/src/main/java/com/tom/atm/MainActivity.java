@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private static final int RC_LOGIN = 100;
     boolean logon = false;
     @Override
@@ -24,9 +24,11 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode != RESULT_OK) {
                 finish();
             } else {
-                // TODO: check nickname, age, gender exists
-                Intent nickname = new Intent(this, NicknameActivity.class);
-                startActivity(nickname);
+                logon = true;
+                if (user.isValid()){
+                Intent nick = new Intent(this, NicknameActivity.class);
+                startActivity(nick);
+                }
             }
         }
     }
