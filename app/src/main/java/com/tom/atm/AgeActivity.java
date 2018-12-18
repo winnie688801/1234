@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -21,7 +22,6 @@ public class AgeActivity extends BaseActivity {
         RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //TODO: set adapter
         recyclerView.setAdapter(new AgeAdapter());
     }
 
@@ -51,11 +51,19 @@ public class AgeActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull AgeActivity.AgeAdapter.AgeHolder holder, int position) {
+        public void onBindViewHolder(@NonNull AgeActivity.AgeAdapter.AgeHolder holder, final int position) {
             holder.ageText.setText(numbers[position]+"");
             if (numbers[position] == 19){
                 holder.ageText.setTextColor(Color.BLUE);
             }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("AgeActivity","onClick" + numbers[position]);
+                }
+            });
+
+
         }
 
         class AgeHolder extends RecyclerView.ViewHolder{
